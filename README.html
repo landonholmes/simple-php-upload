@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>README</title>
+        <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <h1> Programming Languages: </h1>
+                <p>
+                    Homework 3: PHP Server Image Upload <br />
+                    By: Landon Holmes <br />
+                    Due: 2015.10.14 <br />
+                    <a href="index.php">Go To Project</a>
+                </p>
+                <hr />
+                <h2> Setup </h2>
+                <p>
+                    This project has been tested running PHP 5.6.13 for Windows.
+                    It is started by navigating to the root and using the command <span class="label label-info">php -S localhost:8000</span>.
+                    The folder <span class="label label-info">root</span> is treated as the document root.
+                    The site can then be found by going to <span class="label label-info">localhost:8000</span> in the browser.
+                </p>
+                <hr />
+                <h2> Operation </h2>
+                <div>
+                    <h4> Home Page </h4>
+                    <p>
+                        The index page will allow users to choose a file (image) to upload and submit.
+                        It will also pick up a URL parameter with <span class="label label-info">fileName=</span> and try to find an image in upload by that name to display.
+                    </p>
+                    <h4> Processing Page </h4>
+                    <p>
+                        This is the page the form submits back to.
+                        It will run some validation on the file (size/extension) and display error messages with a link back to the form if necessary.
+                        If there are no issues, the javascript will pick up and redirect back to the home page with the url parameter <span class="label label-info">?fileName=</span> and the name of the uploaded file.
+                        This allows the home page to display the uploaded image back to the user.
+                    </p>
+                </div>
+                <hr />
+                <h2> Proof of Running </h2>
+                <p>Can be found in the <span class="label label-info">root/proofOfRunning</span> folder in the case of version/configuration issues hampering the code running.</p>
+                <hr />
+            </div>
+        </div>
+    <script src="./assets/js/bootstrap.min.js" type="javascript"></script>
+    </body>
+</html>
