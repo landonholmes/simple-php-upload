@@ -6,7 +6,7 @@
  * Time: 18:12 PM
  */
 include 'customFunctions.php'; //using a custom function to display file size in a prettier way
-echo "<html><head><title>Processing</title><link href=\"./assets/css/bootstrap.min.css\" rel=\"stylesheet\"></head><body><div class=\"container\"><br />"; //I wanted processing to look pretty
+echo "<html><head><title>Processing</title><link href=\"./assets/css/bootstrap.min.css\" rel=\"stylesheet\"><link rel=\"shortcut icon\" href=\"./assets/favicon.ico\" type=\"image/x-icon\"></head><body><div class=\"container\"><br />"; //I wanted processing to look pretty
 
 
 //set up some variables we'll need
