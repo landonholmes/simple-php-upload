@@ -50,7 +50,7 @@
                 <div class="col-md-4">
                     <?php
                         if(isset($_GET["fileName"])){
-                            $img = "./uploads./".trim($_GET["fileName"]);
+                            $img = "./uploads/".trim($_GET["fileName"]);
                         } else{
                             $img = './assets/thumb.png';
                         }
