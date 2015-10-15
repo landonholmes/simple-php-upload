@@ -31,6 +31,11 @@ if ($fileToUpload_extension != "jpg" && $fileToUpload_extension != "png" && $fil
     $doUpload = false;
 }
 
+if (file_exists($targetSave)) {
+    echo "<p><span class=\"label label-danger\">Your file ($baseFileName) already exists. Please choose a new name and try again.</span></p>";
+    $doUpload = false;
+}
+
 if ($doUpload) {
     echo "<p>Saving file to $targetSave </p>";
     move_uploaded_file($fileToUpload["tmp_name"], $targetSave);

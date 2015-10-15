@@ -28,6 +28,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
     $action = $_POST['action'];
     switch($action) {
         case 'getUploadedPhotos' : echo getUploadedPhotos(); break;
+        case 'removeUploadedPhoto' : echo removeUploadedPhoto($_POST['photoName']); break;
     }
 }
 
@@ -39,4 +40,20 @@ function getUploadedPhotos() {
     };
 
     return json_encode($uploadedPhotosArr);
+}
+
+function removeUploadedPhoto($photoName) {
+    exec('ls ./uploads',$output,$error); //let's get the available images
+    $uploadedPhotosArr = array();
+    while(list(,$row) = each($output)){
+        array_push($uploadedPhotosArr,$row);
+    };
+
+    if (in_array($photoName,$uploadedPhotosArr)) { //want to make sure the image is actually available before we try to delete it
+        $command = 'rm ./uploads/'.$photoName;
+        exec($command);
+        return json_encode('true');
+    } else {
+        return json_encode('false');
+    }
 }

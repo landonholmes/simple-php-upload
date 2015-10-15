@@ -75,68 +75,73 @@
                 </div>
             </div>
             <br /><br /><br /><br /><br />
+            <div style="position: fixed;bottom: 10px; right: 40px; height: 30px; width: 30px; /*border: 1px red solid;*/" id="notHere">&nbsp;</div>
         </div>
         <script src="./assets/js/jquery.min.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="./assets/slick/slick.min.js"></script>
 
-    <script type="text/javascript">
-        var availablePhotos = [];
-        var checkForImagesInterval = setInterval(checkForNewImages, 5000);
+        <script type="text/javascript">
+            var availablePhotos = [];
+            var checkForImagesInterval = setInterval(checkForNewImages, 5000);
 
-        $(document).ready(function(){
-            checkForNewImages();
-        });
+            $(document).ready(function(){
+                checkForNewImages();
+            });
 
-        /*this is the call to get uploaded photos*/
-        function checkForNewImages() {
-            console.log('checking for new images...');
-            $.ajax({
-                url: 'customFunctions.php'
-                ,data: {action: 'getUploadedPhotos'}
-                ,type: 'POST'
-                ,success: function(e) {
-                    //console.log('success: ',e);
-                    var tempPhotoArray = JSON.parse(e);
-                    //console.log('availablePhotos: ',availablePhotos);
-                    //console.log('tempPhotoArray: ',tempPhotoArray);
+            /*this is the call to get uploaded photos*/
+            function checkForNewImages() {
+                console.log('checking for new images...');
+                $.ajax({
+                    url: 'customFunctions.php'
+                    ,data: {action: 'getUploadedPhotos'}
+                    ,type: 'POST'
+                    ,success: function(e) {
+                        //console.log('success: ',e);
+                        var tempPhotoArray = JSON.parse(e);
+                        //console.log('availablePhotos: ',availablePhotos);
+                        //console.log('tempPhotoArray: ',tempPhotoArray);
 
-                    if (JSON.stringify(availablePhotos)!=JSON.stringify(tempPhotoArray)) { //we can compare this way because we know it is just an array of strings, not objects
-                        availablePhotos = tempPhotoArray;
-                        console.log('New images found. Rebuilding slider..');
-                        rebuildSlider(availablePhotos);
-                    } else {
-                        console.log('No new images found. No action taken.');
+                        if (JSON.stringify(availablePhotos)!=JSON.stringify(tempPhotoArray)) { //we can compare this way because we know it is just an array of strings, not objects
+                            availablePhotos = tempPhotoArray;
+                            console.log('New images found. Rebuilding slider..');
+                            rebuildSlider(availablePhotos);
+                        } else {
+                            console.log('No new images found. No action taken.');
+                        }
                     }
-                }
-                ,error: function(e) {
-                    console.log('error when checking for images: ',e);
-                }
-            });
-        }
-
-        function rebuildSlider(availablePhotosArray) {
-            var gallery = $('div.slick-gallery'); //find our slider element
-            if ($('div.slick-initialized').length > 0) { //see if it is already intialized, if so, we need to destroy it first
-                gallery.slick('unslick'); //DESTROY!!!!!
+                    ,error: function(e) {
+                        console.log('error when checking for images: ',e);
+                    }
+                });
             }
-            gallery.empty(); //remove all of the photos from the slider
 
-            $.each(availablePhotosArray,function(index,value){ //for each image we have
-                gallery.append("<div class=\"slick-slide\" ><img src=\"./uploads/"+value+"\" style=\"margin: auto auto;\"/></div>"); //add a slide
+            function rebuildSlider(availablePhotosArray) {
+                var gallery = $('div.slick-gallery'); //find our slider element
+                if ($('div.slick-initialized').length > 0) { //see if it is already intialized, if so, we need to destroy it first
+                    gallery.slick('unslick'); //DESTROY!!!!!
+                }
+                gallery.empty(); //remove all of the photos from the slider
+
+                $.each(availablePhotosArray,function(index,value){ //for each image we have
+                    gallery.append("<div class=\"slick-slide\" ><img src=\"./uploads/"+value+"\" style=\"margin: auto auto;\"/></div>"); //add a slide
+                });
+                startSlider(); //then we need to start the slider
+
+            }
+
+            //function called that starts the slider with specific functions
+            function startSlider() {
+                $('.slick-gallery ').slick({
+                    dots: true
+                    ,speed: 500
+                    ,autoplay: true
+                });
+            }
+
+            $("div#notHere").on("dblclick",function(e){
+                window.location = "manage.php";
             });
-            startSlider(); //then we need to start the slider
-
-        }
-
-        //function called that starts the slider with specific functions
-        function startSlider() {
-            $('.slick-gallery ').slick({
-                dots: true
-                ,speed: 500
-                ,autoplay: true
-            });
-        }
-    </script>
+        </script>
     </body>
 </html>
