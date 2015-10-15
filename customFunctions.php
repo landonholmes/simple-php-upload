@@ -22,3 +22,21 @@ function formatSizeUnits($bytes) {
     }
     return $bytes;
 }
+
+//looks for ajax call
+if(isset($_POST['action']) && !empty($_POST['action'])) {
+    $action = $_POST['action'];
+    switch($action) {
+        case 'getUploadedPhotos' : echo getUploadedPhotos(); break;
+    }
+}
+
+function getUploadedPhotos() {
+    exec('ls ./uploads',$output,$error);
+    $uploadedPhotosArr = array();
+    while(list(,$row) = each($output)){
+        array_push($uploadedPhotosArr,$row);
+    };
+
+    return json_encode($uploadedPhotosArr);
+}
