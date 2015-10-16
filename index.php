@@ -124,7 +124,7 @@
                 gallery.empty(); //remove all of the photos from the slider
 
                 $.each(availablePhotosArray,function(index,value){ //for each image we have
-                    gallery.append("<div class=\"slick-slide\" ><img src=\"./uploads/"+value+"\" style=\"margin: auto auto;\"/></div>"); //add a slide
+                    gallery.append("<div class=\"slick-slide\" ><img src=\"./uploads/"+value+"\" style=\"margin: auto auto; max-height: 480px; max-width: 500px;\"/></div>"); //add a slide
                 });
                 startSlider(); //then we need to start the slider
 
