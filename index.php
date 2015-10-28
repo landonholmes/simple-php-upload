@@ -69,8 +69,8 @@
             <div class="row">
                 <h2 style="text-align: center">Upload History:</h2>
                 <div class="col-md-offset-3 col-md-6">
-                    <div class="slick-gallery img-thumbnail" style="height: 400px">
-                    </div>
+                    <div class="slick-gallery img-thumbnail" style="height: 400px"></div>
+                    <div class="slick-nav" style="height: 100px"></div>
 
                 </div>
             </div>
@@ -118,13 +118,17 @@
 
             function rebuildSlider(availablePhotosArray) {
                 var gallery = $('div.slick-gallery'); //find our slider element
+                var nav = $('div.slick-nav'); //find our slider element
                 if ($('div.slick-initialized').length > 0) { //see if it is already intialized, if so, we need to destroy it first
                     gallery.slick('unslick'); //DESTROY!!!!!
+                    nav.slick('unslick'); //DESTROY!!!!!
                 }
                 gallery.empty(); //remove all of the photos from the slider
+                nav.empty(); //remove all of the photos from the slider
 
                 $.each(availablePhotosArray,function(index,value){ //for each image we have
                     gallery.append("<div class=\"slick-slide\" ><img src=\"./uploads/"+value+"\" style=\"margin: auto auto; max-height: 380px; max-width: 490px;\"/></div>"); //add a slide
+                    nav.append("<div class=\"slick-slide\" ><img src=\"./uploads/"+value+"\" style=\"margin: auto auto; max-height: 150px; max-width: 150px;\"/></div>"); //add a slide
                 });
                 startSlider(); //then we need to start the slider
 
@@ -132,10 +136,21 @@
 
             //function called that starts the slider with specific functions
             function startSlider() {
-                $('.slick-gallery ').slick({
-                    dots: true
+                $('.slick-gallery').slick({
+                    dots: false
                     ,speed: 500
                     ,autoplay: true
+                    ,arrows: false
+                    ,asNavFor: '.slick-nav'
+                });
+                $('.slick-nav').slick({
+                    infinite: true,
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    asNavFor: '.slick-gallery',
+                    dots: true,
+                    centerMode: true,
+                    focusOnSelect: true
                 });
             }
 
