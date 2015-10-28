@@ -128,7 +128,7 @@
 
                 $.each(availablePhotosArray,function(index,value){ //for each image we have
                     gallery.append("<div class=\"slick-slide\" ><img src=\"./uploads/"+value+"\" style=\"margin: auto auto; max-height: 380px; max-width: 490px;\"/></div>"); //add a slide
-                    nav.append("<div class=\"slick-slide\" ><img src=\"./uploads/"+value+"\" style=\"margin: auto auto; max-height: 150px; max-width: 150px;\"/></div>"); //add a slide
+                    nav.append("<div class=\"slick-slide\" ><img src=\"./uploads/"+value+"\" style=\"margin: auto auto; max-height: 90px; max-width: 150px;\"/></div>"); //add a slide
                 });
                 startSlider(); //then we need to start the slider
 
